@@ -48,7 +48,6 @@ namespace gitPrueba.Controllers
             }
             return Ok(libro);
         }
-
         [HttpPost]
         [Route("Add")]
         public IActionResult GuardarLibro([FromBody] Libro libro)

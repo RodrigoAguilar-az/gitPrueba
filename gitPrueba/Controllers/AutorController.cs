@@ -56,5 +56,22 @@ namespace gitPrueba.Controllers
 
             return Ok(listadoAutor);
         }
+
+        [HttpPost]
+        [Route("AddAutor")]
+        public IActionResult AddAutor([FromBody] Autor autor)
+        {
+            try
+            {
+                _autoresContexto.Autor.Add(autor);
+                _autoresContexto.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
