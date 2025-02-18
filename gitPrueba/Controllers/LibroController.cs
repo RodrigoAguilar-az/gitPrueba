@@ -27,5 +27,26 @@ namespace gitPrueba.Controllers
             }
             return Ok(listaLibros);
         }
+
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public IActionResult Get(int id)
+        {
+            var libro = (from l in _bibliotecaContexto.Libro
+                         join a in _bibliotecaContexto.Autor
+                         on l.AutorId equals a.Id
+                         where l.Id == id
+                         select new
+                         {
+                             l.Titulo,
+                             a.Nombre
+                         }).FirstOrDefault();
+
+            if (libro == null)
+            {
+                return NotFound();
+            }
+            return Ok(libro);
+        }
     }
 }
